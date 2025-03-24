@@ -6,11 +6,14 @@
 <h2>Welcome, {{ current_user.username }}!</h2>
 <p>Submit your company's carbon data below:</p>
 
-<!-- Flash Messages -->
+<!-- Flash Messages with Dismiss Option -->
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
-      <div class="alert alert-{{ category }}">{{ message }}</div>
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
     {% endfor %}
   {% endif %}
 {% endwith %}
@@ -20,42 +23,68 @@
   {{ form.hidden_tag() }}
 
   <!-- Energy Footprint Section -->
-  <h4>Energy Footprint</h4>
+  <h4 class="mt-4">Energy Footprint</h4>
   <div class="mb-3">
     {{ form.electricity_bill.label(class="form-label") }} 
-    {{ form.electricity_bill(class="form-control", placeholder="Enter Electricity Bill (kWh)") }}
+    {{ form.electricity_bill(class="form-control", placeholder="e.g., 500 kWh", aria_describedby="electricityHelp") }}
+    {% if form.electricity_bill.errors %}
+      <div class="text-danger">{{ form.electricity_bill.errors[0] }}</div>
+    {% endif %}
   </div>
+  
   <div class="mb-3">
     {{ form.natural_gas_bill.label(class="form-label") }} 
-    {{ form.natural_gas_bill(class="form-control", placeholder="Enter Natural Gas Bill (Therms)") }}
+    {{ form.natural_gas_bill(class="form-control", placeholder="e.g., 200 Therms", aria_describedby="gasHelp") }}
+    {% if form.natural_gas_bill.errors %}
+      <div class="text-danger">{{ form.natural_gas_bill.errors[0] }}</div>
+    {% endif %}
   </div>
+  
   <div class="mb-3">
     {{ form.fuel_bill.label(class="form-label") }} 
-    {{ form.fuel_bill(class="form-control", placeholder="Enter Fuel Bill (Liters)") }}
+    {{ form.fuel_bill(class="form-control", placeholder="e.g., 50 Liters", aria_describedby="fuelHelp") }}
+    {% if form.fuel_bill.errors %}
+      <div class="text-danger">{{ form.fuel_bill.errors[0] }}</div>
+    {% endif %}
   </div>
 
   <!-- Waste Footprint Section -->
-  <h4>Waste Footprint</h4>
+  <h4 class="mt-4">Waste Footprint</h4>
   <div class="mb-3">
     {{ form.waste_generated.label(class="form-label") }} 
-    {{ form.waste_generated(class="form-control", placeholder="Enter Waste Generated (kg)") }}
+    {{ form.waste_generated(class="form-control", placeholder="e.g., 300 kg", aria_describedby="wasteHelp") }}
+    {% if form.waste_generated.errors %}
+      <div class="text-danger">{{ form.waste_generated.errors[0] }}</div>
+    {% endif %}
   </div>
+  
   <div class="mb-3">
     {{ form.recycling_percentage.label(class="form-label") }} 
-    {{ form.recycling_percentage(class="form-control", placeholder="Recycling Percentage (%)") }}
+    {{ form.recycling_percentage(class="form-control", placeholder="e.g., 60%", aria_describedby="recycleHelp") }}
+    {% if form.recycling_percentage.errors %}
+      <div class="text-danger">{{ form.recycling_percentage.errors[0] }}</div>
+    {% endif %}
   </div>
 
   <!-- Travel Footprint Section -->
-  <h4>Travel Footprint</h4>
+  <h4 class="mt-4">Travel Footprint</h4>
   <div class="mb-3">
     {{ form.kilometers_traveled.label(class="form-label") }} 
-    {{ form.kilometers_traveled(class="form-control", placeholder="Enter Kilometers Traveled (km)") }}
+    {{ form.kilometers_traveled(class="form-control", placeholder="e.g., 1500 km", aria_describedby="travelHelp") }}
+    {% if form.kilometers_traveled.errors %}
+      <div class="text-danger">{{ form.kilometers_traveled.errors[0] }}</div>
+    {% endif %}
   </div>
+  
   <div class="mb-3">
     {{ form.fuel_efficiency.label(class="form-label") }} 
-    {{ form.fuel_efficiency(class="form-control", placeholder="Enter Fuel Efficiency (km/l)") }}
+    {{ form.fuel_efficiency(class="form-control", placeholder="e.g., 15 km/l", aria_describedby="efficiencyHelp") }}
+    {% if form.fuel_efficiency.errors %}
+      <div class="text-danger">{{ form.fuel_efficiency.errors[0] }}</div>
+    {% endif %}
   </div>
 
+  <!-- Submit Button -->
   <button type="submit" class="btn btn-primary">Submit Data</button>
 </form>
 

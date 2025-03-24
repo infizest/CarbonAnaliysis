@@ -4,54 +4,79 @@
 
 {% block content %}
   <h2>Carbon Footprint Overview</h2>
-
   <p>Here are your submitted data visualizations:</p>
-
-  <!-- Graphs Section -->
   <h4>Energy Usage</h4>
   <div id="energy-graph">
-    {{ energy_graph | safe }}
+    {% if energy_graph %}
+      <img src="{{ energy_graph }}" alt="Energy Usage Graph" />
+    {% else %}
+      <p>No graph available</p>
+    {% endif %}
   </div>
-
+  
   <h4>Waste Management</h4>
   <div id="waste-graph">
-    {{ waste_graph | safe }}
+    {% if waste_graph %}
+      <img src="{{ waste_graph }}" alt="Waste Management Graph" />
+    {% else %}
+      <p>No graph available</p>
+    {% endif %}
   </div>
-
+  
   <h4>Business Travel Trends</h4>
   <div id="travel-graph">
-    {{ travel_graph | safe }}
+    {% if travel_graph %}
+      <img src="{{ travel_graph }}" alt="Business Travel Trends Graph" />
+    {% else %}
+      <p>No graph available</p>
+    {% endif %}
   </div>
+  
 
-  <!-- PDF Download Button -->
-  <button id="download-pdf" class="btn btn-success">Download as PDF</button>
+  <!-- PDF Download Button with Margin -->
+  <button id="download-pdf" class="btn btn-success mt-4">Download as PDF</button>
 
   <!-- JavaScript for PDF Generation -->
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-    document.getElementById('download-pdf').addEventListener('click', function() {
+    document.getElementById('download-pdf').addEventListener('click', async function() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-      
-      // Capture all graph divs
-      const captureAndAddToPDF = (elementId, yOffset) => {
-        html2canvas(document.getElementById(elementId)).then(canvas => {
-          const imgData = canvas.toDataURL('image/png');
-          const imgWidth = 180;
-          const imgHeight = (canvas.height * imgWidth) / canvas.width;
-          doc.addImage(imgData, 'PNG', 15, yOffset, imgWidth, imgHeight);
-          if (elementId !== 'travel-graph') {
-            doc.addPage();
-          }
-        });
-      };
 
-      captureAndAddToPDF('energy-graph', 20);
-      setTimeout(() => captureAndAddToPDF('waste-graph', 20), 500);
-      setTimeout(() => captureAndAddToPDF('travel-graph', 20), 1000);
+      // Function to capture a graph and add it to PDF
+      async function captureAndAddToPDF(elementId, title, yOffset) {
+        const element = document.getElementById(elementId);
+        if (!element) {
+          alert(`${title} graph not found!`);
+          return;
+        }
 
-      setTimeout(() => doc.save('carbon_footprint_report.pdf'), 1500);
+        // Capture and generate canvas
+        const canvas = await html2canvas(element);
+        const imgData = canvas.toDataURL('image/png');
+        const imgWidth = 180;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        // Add title and image to PDF
+        doc.setFontSize(18);
+        doc.text(title, 15, yOffset);
+        doc.addImage(imgData, 'PNG', 15, yOffset + 10, imgWidth, imgHeight);
+
+        // Add a new page if not the last graph
+        doc.addPage();
+      }
+
+      try {
+        await captureAndAddToPDF('energy-graph', 'Energy Usage', 20);
+        await captureAndAddToPDF('waste-graph', 'Waste Management', 20);
+        await captureAndAddToPDF('travel-graph', 'Business Travel Trends', 20);
+
+        doc.save('carbon_footprint_report.pdf');
+      } catch (error) {
+        console.error("Error generating PDF:", error);
+        alert("An error occurred while generating the PDF. Please try again.");
+      }
     });
   </script>
 

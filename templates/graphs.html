@@ -4,22 +4,14 @@
 
 {% block content %}
 <h2>Your Carbon Footprint Overview</h2>
+<h4>Energy Usage</h4>
+<img src="{{ energy_graph }}" alt="Energy Usage Graph"/>
 
-<!-- Graphs -->
-<div class="mb-4">
-  <h4>Energy Usage</h4>
-  {{ energy_graph|safe }}
-</div>
+<h4>Waste Management</h4>
+<img src="{{ waste_graph }}" alt="Waste Management Graph"/>
 
-<div class="mb-4">
-  <h4>Waste Management</h4>
-  {{ waste_graph|safe }}
-</div>
-
-<div class="mb-4">
-  <h4>Business Travel Trends</h4>
-  {{ travel_graph|safe }}
-</div>
+<h4>Business Travel Trends</h4>
+<img src="{{ travel_graph }}" alt="Business Travel Trends Graph"/>
 
 <!-- Download PDF Button -->
 <a href="{{ url_for('download_pdf') }}" class="btn btn-danger">Download PDF Report</a>
