@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Results - Carbon Footprint Overview{% endblock %}
+
+{% block content %}
+  <h2>Carbon Footprint Overview</h2>
+
+  <p>Here are your submitted data visualizations:</p>
+
+  <!-- Graphs Section -->
+  <h4>Energy Usage</h4>
+  <div id="energy-graph">
+    {{ energy_graph | safe }}
+  </div>
+
+  <h4>Waste Management</h4>
+  <div id="waste-graph">
+    {{ waste_graph | safe }}
+  </div>
+
+  <h4>Business Travel Trends</h4>
+  <div id="travel-graph">
+    {{ travel_graph | safe }}
+  </div>
+
+  <!-- PDF Download Button -->
+  <button id="download-pdf" class="btn btn-success">Download as PDF</button>
+
+  <!-- JavaScript for PDF Generation -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    document.getElementById('download-pdf').addEventListener('click', function() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      // Capture all graph divs
+      const captureAndAddToPDF = (elementId, yOffset) => {
+        html2canvas(document.getElementById(elementId)).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const imgWidth = 180;
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+          doc.addImage(imgData, 'PNG', 15, yOffset, imgWidth, imgHeight);
+          if (elementId !== 'travel-graph') {
+            doc.addPage();
+          }
+        });
+      };
+
+      captureAndAddToPDF('energy-graph', 20);
+      setTimeout(() => captureAndAddToPDF('waste-graph', 20), 500);
+      setTimeout(() => captureAndAddToPDF('travel-graph', 20), 1000);
+
+      setTimeout(() => doc.save('carbon_footprint_report.pdf'), 1500);
+    });
+  </script>
+
+  <!-- Back to Dashboard -->
+  <a href="{{ url_for('dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+{% endblock %}

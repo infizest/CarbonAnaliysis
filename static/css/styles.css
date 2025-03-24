@@ -1,0 +1,44 @@
+/* General styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+  }
+  
+  /* Navbar styling */
+  .navbar {
+    margin-bottom: 20px;
+  }
+  
+  /* Form Styling */
+  form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Heading */
+  h2 {
+    color: #007bff;
+  }
+  
+  /* Flash Message Styling */
+  .alert {
+    margin-top: 10px;
+  }
+  
+  /* Button Styling */
+  button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Dashboard Chart Section */
+  #chart-section {
+    margin-top: 30px;
+  }
+  

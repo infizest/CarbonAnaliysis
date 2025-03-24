@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Graphs - Carbon Footprint Tool{% endblock %}
+
+{% block content %}
+<h2>Your Carbon Footprint Overview</h2>
+
+<!-- Graphs -->
+<div class="mb-4">
+  <h4>Energy Usage</h4>
+  {{ energy_graph|safe }}
+</div>
+
+<div class="mb-4">
+  <h4>Waste Management</h4>
+  {{ waste_graph|safe }}
+</div>
+
+<div class="mb-4">
+  <h4>Business Travel Trends</h4>
+  {{ travel_graph|safe }}
+</div>
+
+<!-- Download PDF Button -->
+<a href="{{ url_for('download_pdf') }}" class="btn btn-danger">Download PDF Report</a>
+{% endblock %}

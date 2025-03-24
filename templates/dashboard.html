@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Carbon Footprint Tool{% endblock %}
+
+{% block content %}
+<h2>Welcome, {{ current_user.username }}!</h2>
+<p>Submit your company's carbon data below:</p>
+
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<!-- Form for Carbon Footprint Data -->
+<form method="post" action="{{ url_for('dashboard') }}">
+  {{ form.hidden_tag() }}
+
+  <!-- Energy Footprint Section -->
+  <h4>Energy Footprint</h4>
+  <div class="mb-3">
+    {{ form.electricity_bill.label(class="form-label") }} 
+    {{ form.electricity_bill(class="form-control", placeholder="Enter Electricity Bill (kWh)") }}
+  </div>
+  <div class="mb-3">
+    {{ form.natural_gas_bill.label(class="form-label") }} 
+    {{ form.natural_gas_bill(class="form-control", placeholder="Enter Natural Gas Bill (Therms)") }}
+  </div>
+  <div class="mb-3">
+    {{ form.fuel_bill.label(class="form-label") }} 
+    {{ form.fuel_bill(class="form-control", placeholder="Enter Fuel Bill (Liters)") }}
+  </div>
+
+  <!-- Waste Footprint Section -->
+  <h4>Waste Footprint</h4>
+  <div class="mb-3">
+    {{ form.waste_generated.label(class="form-label") }} 
+    {{ form.waste_generated(class="form-control", placeholder="Enter Waste Generated (kg)") }}
+  </div>
+  <div class="mb-3">
+    {{ form.recycling_percentage.label(class="form-label") }} 
+    {{ form.recycling_percentage(class="form-control", placeholder="Recycling Percentage (%)") }}
+  </div>
+
+  <!-- Travel Footprint Section -->
+  <h4>Travel Footprint</h4>
+  <div class="mb-3">
+    {{ form.kilometers_traveled.label(class="form-label") }} 
+    {{ form.kilometers_traveled(class="form-control", placeholder="Enter Kilometers Traveled (km)") }}
+  </div>
+  <div class="mb-3">
+    {{ form.fuel_efficiency.label(class="form-label") }} 
+    {{ form.fuel_efficiency(class="form-control", placeholder="Enter Fuel Efficiency (km/l)") }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit Data</button>
+</form>
+
+<!-- View Graphs Button -->
+<a href="{{ url_for('view_graphs') }}" class="btn btn-success mt-3">View Graphs & Download PDF</a>
+{% endblock %}
