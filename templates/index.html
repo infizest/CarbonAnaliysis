@@ -4,8 +4,16 @@
 
 {% block content %}
   <div class="text-center mt-5">
-    <h1>Welcome to the Carbon Footprint Monitoring Tool</h1>
-    <p>Monitor and manage your company's carbon emissions efficiently.</p>
+    <style>
+      .welcome-section h1, 
+.welcome-section p {
+  color: white;
+}
+    </style>
+ <div class="welcome-section">
+  <h1 style="color: white;">Welcome to the Carbon Footprint Monitoring Tool</h1>
+  <p style="color: white;">Monitor and manage your company's carbon emissions efficiently.</p>
+</div>
     <a href="/login" class="btn btn-primary">Login</a>
     <a href="/register" class="btn btn-success">Register</a>
   </div>

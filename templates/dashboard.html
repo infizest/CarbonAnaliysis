@@ -3,8 +3,8 @@
 {% block title %}Dashboard - Carbon Footprint Tool{% endblock %}
 
 {% block content %}
-<h2>Welcome, {{ current_user.username }}!</h2>
-<p>Submit your company's carbon data below:</p>
+<h2 style="color: white;">Welcome, {{ current_user.username }}!</h2>
+<p style="color: white;">Submit  {{ current_user.company_name}}'s carbon data below:</p>
 
 <!-- Flash Messages with Dismiss Option -->
 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -85,9 +85,10 @@
   </div>
 
   <!-- Submit Button -->
-  <button type="submit" class="btn btn-primary">Submit Data</button>
+  <button type="submit" class="btn btn-primary">Step 1 : Submit Data</button>
+  <p>You need to submit your data to view the graphs</p>
 </form>
 
 <!-- View Graphs Button -->
-<a href="{{ url_for('view_graphs') }}" class="btn btn-success mt-3">View Graphs & Download PDF</a>
+<a href="{{ url_for('view_graphs') }}" class="btn btn-success mt-3">Step 2: View Graphs & Download PDF</a>
 {% endblock %}
