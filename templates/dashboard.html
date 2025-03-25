@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2 style="color: white;">Welcome, {{ current_user.username }}!</h2>
-<p style="color: white;">Submit your company's carbon data below:</p>
+<p style="color: white;">Submit  {{ current_user.company_name}}'s carbon data below:</p>
 
 <!-- Flash Messages with Dismiss Option -->
 {% with messages = get_flashed_messages(with_categories=true) %}
