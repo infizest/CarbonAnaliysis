@@ -25,24 +25,24 @@
   <!-- Energy Footprint Section -->
   <h4 class="mt-4">Energy Footprint</h4>
   <div class="mb-3">
-    {{ form.electricity_bill.label(class="form-label") }} 
-    {{ form.electricity_bill(class="form-control", placeholder="e.g., 500 kWh", aria_describedby="electricityHelp") }}
+    {{ form.electricity_bill.label(class="form-label") }}
+    {{ form.electricity_bill(class="form-control", placeholder="e.g., 500 kWh", min="1", type="number", step="0.01", required=True) }}
     {% if form.electricity_bill.errors %}
       <div class="text-danger">{{ form.electricity_bill.errors[0] }}</div>
     {% endif %}
   </div>
   
   <div class="mb-3">
-    {{ form.natural_gas_bill.label(class="form-label") }} 
-    {{ form.natural_gas_bill(class="form-control", placeholder="e.g., 200 Therms", aria_describedby="gasHelp") }}
+    {{ form.natural_gas_bill.label(class="form-label") }}
+    {{ form.natural_gas_bill(class="form-control", placeholder="e.g., 200 Therms", min="1", type="number", step="0.01", required=True) }}
     {% if form.natural_gas_bill.errors %}
       <div class="text-danger">{{ form.natural_gas_bill.errors[0] }}</div>
     {% endif %}
   </div>
   
   <div class="mb-3">
-    {{ form.fuel_bill.label(class="form-label") }} 
-    {{ form.fuel_bill(class="form-control", placeholder="e.g., 50 Liters", aria_describedby="fuelHelp") }}
+    {{ form.fuel_bill.label(class="form-label") }}
+    {{ form.fuel_bill(class="form-control", placeholder="e.g., 50 Liters", min="1", type="number", step="0.01", required=True) }}
     {% if form.fuel_bill.errors %}
       <div class="text-danger">{{ form.fuel_bill.errors[0] }}</div>
     {% endif %}
@@ -51,16 +51,16 @@
   <!-- Waste Footprint Section -->
   <h4 class="mt-4">Waste Footprint</h4>
   <div class="mb-3">
-    {{ form.waste_generated.label(class="form-label") }} 
-    {{ form.waste_generated(class="form-control", placeholder="e.g., 300 kg", aria_describedby="wasteHelp") }}
+    {{ form.waste_generated.label(class="form-label") }}
+    {{ form.waste_generated(class="form-control", placeholder="e.g., 300 kg", min="1", type="number", step="0.01", required=True) }}
     {% if form.waste_generated.errors %}
       <div class="text-danger">{{ form.waste_generated.errors[0] }}</div>
     {% endif %}
   </div>
   
   <div class="mb-3">
-    {{ form.recycling_percentage.label(class="form-label") }} 
-    {{ form.recycling_percentage(class="form-control", placeholder="e.g., 60%", aria_describedby="recycleHelp") }}
+    {{ form.recycling_percentage.label(class="form-label") }}
+    {{ form.recycling_percentage(class="form-control", placeholder="e.g., 60%", min="1", max="100", type="number", step="0.01", required=True) }}
     {% if form.recycling_percentage.errors %}
       <div class="text-danger">{{ form.recycling_percentage.errors[0] }}</div>
     {% endif %}
@@ -69,16 +69,16 @@
   <!-- Travel Footprint Section -->
   <h4 class="mt-4">Travel Footprint</h4>
   <div class="mb-3">
-    {{ form.kilometers_traveled.label(class="form-label") }} 
-    {{ form.kilometers_traveled(class="form-control", placeholder="e.g., 1500 km", aria_describedby="travelHelp") }}
+    {{ form.kilometers_traveled.label(class="form-label") }}
+    {{ form.kilometers_traveled(class="form-control", placeholder="e.g., 1500 km", min="1", type="number", step="0.01", required=True) }}
     {% if form.kilometers_traveled.errors %}
       <div class="text-danger">{{ form.kilometers_traveled.errors[0] }}</div>
     {% endif %}
   </div>
   
   <div class="mb-3">
-    {{ form.fuel_efficiency.label(class="form-label") }} 
-    {{ form.fuel_efficiency(class="form-control", placeholder="e.g., 15 km/l", aria_describedby="efficiencyHelp") }}
+    {{ form.fuel_efficiency.label(class="form-label") }}
+    {{ form.fuel_efficiency(class="form-control", placeholder="e.g., 15 km/l", min="1", type="number", step="0.01", required=True) }}
     {% if form.fuel_efficiency.errors %}
       <div class="text-danger">{{ form.fuel_efficiency.errors[0] }}</div>
     {% endif %}
