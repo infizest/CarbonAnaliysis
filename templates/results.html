@@ -3,9 +3,9 @@
 {% block title %}Results - Carbon Footprint Overview{% endblock %}
 
 {% block content %}
-  <h2>Carbon Footprint Overview</h2>
-  <p>Here are your submitted data visualizations:</p>
-  <h4>Energy Usage</h4>
+  <h2 style="color: white;">Carbon Footprint Overview</h2>
+  <p style="color: white;">Here are your submitted data visualizations:</p>
+  <h4 style="color: white;">Energy Usage</h4>
   <div id="energy-graph">
     {% if energy_graph %}
       <img src="{{ energy_graph }}" alt="Energy Usage Graph" />
@@ -14,7 +14,7 @@
     {% endif %}
   </div>
   
-  <h4>Waste Management</h4>
+  <h4 style="color: white;">Waste Management</h4>
   <div id="waste-graph">
     {% if waste_graph %}
       <img src="{{ waste_graph }}" alt="Waste Management Graph" />
@@ -23,7 +23,7 @@
     {% endif %}
   </div>
   
-  <h4>Business Travel Trends</h4>
+  <h4 style="color: white;">Business Travel Trends</h4>
   <div id="travel-graph">
     {% if travel_graph %}
       <img src="{{ travel_graph }}" alt="Business Travel Trends Graph" />
