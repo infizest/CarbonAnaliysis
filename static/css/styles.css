@@ -1,9 +1,18 @@
 /* General styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6;
-  }
-  
+  background-image: url('https://www.lythouse.com/wp-content/uploads/2024/08/ecological-footprint_compressed.webp'); /* Adjust path if needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional for a fixed background */
+  color: #fff; /* Adjust text color for better visibility */
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.7); /* Optional for content contrast */
+  padding: 20px;
+  border-radius: 8px;
+}
   /* Navbar styling */
   .navbar {
     margin-bottom: 20px;
